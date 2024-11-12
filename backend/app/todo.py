@@ -14,3 +14,19 @@ def allTodos():
 @app.post("new-todo")
 def newTodo():
     {id, title, description} = 
+
+
+@app.put("new-todo")
+def newTodo():
+    {id, title, description} = 
+
+
+@app.patch("new-todo")
+def newTodo():
+    {id, title, description} = 
+
+
+@app.delete("new-todo")
+def newTodo():
+    {id, title, description} = 
+
