@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
 
@@ -9,9 +9,8 @@ class Item(BaseModel):
     description: str
 
 class TodoUpdate(BaseModel):
-    title: Optional[str] = None
-    completed: Optional[bool] = None
-
+    updatedTitle: Optional[str] = None
+    updatedDescription: Optional[str] = None
 
 
 app = FastAPI()
@@ -38,8 +37,20 @@ async def new_todo(item: Item):
     return {"message": "Successfully added new item"}
 
 @app.patch("/update-todo/{id}")
-async def update_todo():
-    todos = todos.find(lambda: x => )
+async def update_todo(id: str, todo_update: TodoUpdate):
+    todo = next((t for t in todos if t["id"] == id), None)
+
+    if not todo: 
+        raise HTTPException(status_code=404, detail="Todo not found")\
+    
+    if todo_update.updatedTitle is not None:
+        todo["title"] = todo_update.updatedTitle
+    
+    if todo_update.updatedDescription is not None:
+        todo["description"] = todo_update.updatedDescription
+    
+    return todo
+
 
 import uvicorn
 uvicorn.run(app)
