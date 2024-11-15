@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPi
 from enum import Enum
 
 class ModelName(str,Enum):
