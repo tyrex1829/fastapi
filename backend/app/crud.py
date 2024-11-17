@@ -29,5 +29,13 @@ async def get_models(model_name: ModelName):
     
     return {"model_name": model_name, "message": "Have some residuels"}
 
+# get async method on "/query" with query-param -> name
+@app.get("/query")
+async def query_params(name: str):
+    return {"message": f"Hello {name}"}
+
+# 
+
+
 import uvicorn
 uvicorn.run(app)
